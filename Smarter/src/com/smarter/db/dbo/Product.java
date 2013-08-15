@@ -1,14 +1,16 @@
 package com.smarter.db.dbo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 
 /**
@@ -17,26 +19,58 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="products")
+@JsonIgnoreProperties(ignoreUnknown = true) 
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="product_id")
-	private Long productId;
-
-	//bi-directional many-to-one association to ProductItem
-	@OneToMany(mappedBy="product")
-	private List<ProductItem> productItems;
+	@Column(name="id")
+	private Long id;
+	
+	@Column(name="name")
+	private String name;
+	
+	@Column(name="date_created")
+	private Date dateCreated;
+	
+	@Column(name="date_modified")
+	private Date dateModified;
 
 	public Product() {
 	}
 
-	public Long getProductId() {
-		return this.productId;
+	public Long getId() {
+		return this.id;
 	}
 
-	public void setProductId(Long productId) {
-		this.productId = productId;
+	public void setId(Long id) {
+		this.id = id;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	public Date getDateModified() {
+		return dateModified;
+	}
+
+	public void setDateModified(Date dateModified) {
+		this.dateModified = dateModified;
+	}
+	
+	
 }

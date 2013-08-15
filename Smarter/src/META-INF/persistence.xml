@@ -4,13 +4,16 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>com.smarter.db.dbo.ProductItem</class>
 		<class>com.smarter.db.dbo.Product</class>
+		<class>com.smarter.db.dbo.ProductRank</class>
 		<class>com.smarter.db.dbo.User</class>
+		<class>com.smarter.db.dbo.ShoppingList</class>
 		<properties>
 			<property name="javax.persistence.jdbc.password" value="smarter"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/smarter?schema=smarter"/>
 			<property name="javax.persistence.jdbc.user" value="postgres"/>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
 			<property name="hibernate.default_schema" value="smarter"/>
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
 		</properties>
 	</persistence-unit>
 </persistence>
