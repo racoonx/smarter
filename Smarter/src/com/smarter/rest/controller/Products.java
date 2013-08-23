@@ -21,36 +21,67 @@ public class Products {
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	public @ResponseBody Product getProduct(@PathVariable Long id) {
 		EntityManager em = DBManager.getEntityManager();
-		em.getTransaction().begin();
-		Product p = em.find(Product.class, id);
-		em.getTransaction().commit();
+		Product p = null;
+		try {
+			em.getTransaction().begin();
+			p = em.find(Product.class, id);
+			em.getTransaction().commit();
+		} catch (Throwable e) {
+			em.getTransaction().rollback();
+		}
 		return p;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody List<Product> getAllProducts() {
 		EntityManager em = DBManager.getEntityManager();
-		em.getTransaction().begin();
-		List<Product> p = em.createQuery("SELECT e FROM Product e").getResultList();
-		em.getTransaction().commit();
+		List<Product> p = null;
+		try {
+			em.getTransaction().begin();
+			p = em.createQuery("SELECT e FROM Product e").getResultList();
+			em.getTransaction().commit();
+		} catch (Throwable e) {
+			em.getTransaction().rollback();
+		}
 		return p;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody Product addProduct(@RequestBody Product p) {
 		EntityManager em = DBManager.getEntityManager();
-		em.getTransaction().begin();
-		em.persist(p);
-		em.getTransaction().commit();
+		try {
+			em.getTransaction().begin();
+			em.persist(p);
+			em.getTransaction().commit();
+		} catch (Throwable e) {
+			em.getTransaction().rollback();
+		}
 		return p;
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
 	public @ResponseBody Product editProduct(@RequestBody Product p) {
 		EntityManager em = DBManager.getEntityManager();
-		em.getTransaction().begin();
-		em.merge(p);
-		em.getTransaction().commit();
+		try {
+			em.getTransaction().begin();
+			em.merge(p);
+			em.getTransaction().commit();
+		} catch (Throwable e) {
+			em.getTransaction().rollback();
+		}
 		return p;
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public @ResponseBody void deleteProduct(@PathVariable("id") Long id) {
+		EntityManager em = DBManager.getEntityManager();
+		try {
+			Product p = em.find(Product.class, id);
+			em.getTransaction().begin();
+			em.remove(p);
+			em.getTransaction().commit();
+		} catch (Throwable e) {
+			em.getTransaction().rollback();
+		}
 	}
 }

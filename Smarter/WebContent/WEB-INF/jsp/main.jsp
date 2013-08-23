@@ -5,6 +5,7 @@
 <head>
     <title>My Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/smarter.css">
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css">
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
@@ -20,19 +21,8 @@
 	</script>
 </head>
 <body>
-	<div>
-		<div class="product">
-			<div>
-			<label><input type="checkbox" name="checkbox-0 "><img width="32" height="32" src="https://developers.google.com/_static/images/developers-logo.svg"/>Check me</label>
-	    	</div>
-		</div>
-	</div>
-	
 	<div class="main_container">
 			
 	</div>
-<div data-role="controlgroup" data-type="horizontal">
-    <a href="#" data-role="button">Add</a>
-</div>	  
 </body>
 </html>
